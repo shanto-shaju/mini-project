@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>QR Code Generator</title>
+    <link rel="stylesheet" href="mystyleesheet.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: black;
+    }
+    #qrcode {
+      margin-top: 20px;
+      border: 5px solid white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input[type="text"] {
+      padding: 10px;
+      width: 300px;
+      border: 4px solid aqua;
+      border-radius: 9px;
+    }
+    button {
+      padding: 10px 20px;
+      margin-left: 10px;
+      border: none;
+      background-color: aqua;
+      color: red;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: aqua;
+    }
+  </style>
+</head>
+<body>
+<a href="index.html" class="button6"><b>HOME</b></a>
+<a href="tools.html" class="button5"><b>TOOLS</b></a>
+  <h2>QR Code Generator</h2>
+  <div>
+    <input type="text" id="text" placeholder="Enter text or URL">
+    <button id="generate">Generate QR Code</button>
+  </div>
+  <div id="qrcode"></div>
+
+  <script>
+    const textInput = document.getElementById('text');
+    const generateButton = document.getElementById('generate');
+    const qrcodeDiv = document.getElementById('qrcode');
+    let qrcode = null; // To hold the QRCode instance
+
+    function generateQRCode() {
+      const text = textInput.value.trim();
+      if (text) {
+        // Clear previous QR code if one exists
+        qrcodeDiv.innerHTML = '';
+
+        // Create a new QR Code
+        qrcode = new QRCode(qrcodeDiv, {
+          text: text,
+          width: 200,
+          height: 200,
+          // Corrected the syntax for colorDark
+          colorDark: '#000000',
+          colorLight: '#ffffff',
+          correctLevel: QRCode.CorrectLevel.H
+        });
+      } else {
+        alert('Please enter some text or a URL.');
+      }
+    }
+
+    // Generate QR code on button click
+    generateButton.addEventListener('click', generateQRCode);
+
+    // Optional: Generate QR code when user presses Enter in the input field
+    textInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        generateQRCode();
+      }
+    });
+  </script>
+</body>
+</html>
