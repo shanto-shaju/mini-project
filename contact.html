@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Help / Contact Us</title>
+    <title>Contact Us / Help</title>
     <style>
         body {
             margin: 0;
@@ -15,29 +15,23 @@
 
         .container {
             background: rgba(0, 0, 0, 0.7);
-            max-width: 900px;
+            max-width: 700px;
             margin: 50px auto;
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 0 20px rgba(0,0,0,0.7);
-        }
-
-        h1, h2 {
-            color: #00ffff;
+            text-align: center;
         }
 
         h1 {
-            text-align: center;
+            color: #00ffff;
             font-size: 36px;
-        }
-
-        h2 {
-            margin-top: 40px;
+            margin-bottom: 15px;
         }
 
         p {
-            font-size: 18px;
-            line-height: 1.6;
+            font-size: 16px;
+            line-height: 1.5;
             margin-bottom: 30px;
         }
 
@@ -62,6 +56,134 @@
         .home-btn {
             display: inline-block;
             padding: 10px 20px;
+            font-size: 16px;
+            color: #000;
+            background-color: #00ffff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-bottom: 20px;
+        }
+
+        .chatbox {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            max-height: 400px;
+            background: rgba(0,0,0,0.85);
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            background: #00ffff;
+            padding: 10px;
+            color: #000;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        .chat-input {
+            display: flex;
+            border-top: 1px solid #00ffff;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            outline: none;
+        }
+
+        .chat-input button {
+            padding: 10px;
+            background: #00ffff;
+            border: none;
+            cursor: pointer;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Contact Us</h1>
+        <p>
+            We are here to help! Reach out to us via Instagram, phone, or email, and we’ll respond promptly.
+        </p>
+
+        <div class="buttons">
+            <a href="https://instagram.com/shanto__shaju" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" class="contact-logo">
+            </a>
+            <a href="tel:+918086879993">
+                <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Call" class="contact-logo">
+            </a>
+            <a href="mailto:shantoshanto47469@gmail.com">
+                <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email" class="contact-logo">
+            </a>
+        </div>
+
+        <a href="index.html" class="home-btn">Back to Home</a>
+    </div>
+
+    <!-- Simple AI Chatbot -->
+    <div class="chatbox">
+        <div class="chat-header">AI Chatbot</div>
+        <div class="chat-messages" id="chatMessages">
+            <div>Hi! I'm your assistant. How can I help you today?</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const chat = document.getElementById('chatMessages');
+            const userMessage = input.value.trim();
+            if(userMessage === "") return;
+            
+            // Add user message
+            const userDiv = document.createElement('div');
+            userDiv.textContent = "You: " + userMessage;
+            userDiv.style.marginBottom = "5px";
+            chat.appendChild(userDiv);
+
+            // Basic AI reply logic
+            const botDiv = document.createElement('div');
+            if(userMessage.toLowerCase().includes("instagram")) {
+                botDiv.textContent = "Bot: You can contact us via Instagram: shanto__shaju";
+            } else if(userMessage.toLowerCase().includes("call") || userMessage.toLowerCase().includes("phone")) {
+                botDiv.textContent = "Bot: You can call us at 8086879993";
+            } else if(userMessage.toLowerCase().includes("email")) {
+                botDiv.textContent = "Bot: You can email us at shantoshanto47469@gmail.com";
+            } else {
+                botDiv.textContent = "Bot: I'm here to help! You can ask me about contact methods.";
+            }
+            botDiv.style.marginBottom = "5px";
+            chat.appendChild(botDiv);
+
+            chat.scrollTop = chat.scrollHeight;
+            input.value = "";
+        }
+    </script>
+</body>
+</html>            padding: 10px 20px;
             margin-bottom: 30px;
             font-size: 16px;
             color: #000;
